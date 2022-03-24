@@ -13,7 +13,10 @@
 
 using namespace std;
 
-Adafruit_NeoPixel LedStrip(88, 2, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel Ledset1(88, 2, NEO_GRB + NEO_KHZ800);
+
+Adafruit_NeoPixel Ledset2(85, 3, NEO_GRB + NEO_KHZ800);
+
 
 atomic<bool> updated(false);
 bitset<8> functionCommand, boardSelect, bitSelect, red, green, blue;
@@ -38,8 +41,8 @@ class MyCallbacks : public BLECharacteristicCallbacks {
 
 void setup() {
     Serial.begin(115200);
-    LedStrip.begin();
-    LedStrip.show(); // Initialize all pixels to 'off'
+    Ledset1.begin();
+    Ledset1.show(); // Initialize all pixels to 'off'
 
     BLEDevice::init("MyESP32");
     BLEServer *pServer = BLEDevice::createServer();
@@ -63,16 +66,16 @@ void setup() {
 
     for (int i = 0; i <= 88; i++) {
         if (bitSelect.to_ulong() == i) {
-            LedStrip.setPixelColor(i, Adafruit_NeoPixel::Color(
+            Ledset1.setPixelColor(i, Adafruit_NeoPixel::Color(
                     red.to_ulong(),
                     green.to_ulong(),
                     blue.to_ulong()))
                     ;} else
-            LedStrip.setPixelColor(i, Adafruit_NeoPixel::Color(
+            Ledset1.setPixelColor(i, Adafruit_NeoPixel::Color(
                     15,
                     15,
                     15));;
-        LedStrip.show();
+        Ledset1.show();
     }
 }
 
@@ -94,18 +97,13 @@ void loop() {
         Serial.println(")");
 
 
-        for (int i = 0; i <= 88; i++) {
-            if (bitSelect.to_ulong() == i) {
-                LedStrip.setPixelColor(i, Adafruit_NeoPixel::Color(
-                        red.to_ulong(),
-                        green.to_ulong(),
-                        blue.to_ulong()))
-            ;} else
-                LedStrip.setPixelColor(i, Adafruit_NeoPixel::Color(
-                        15,
-                        15,
-                        15));;
-            LedStrip.show();
+        if (boardSelect.to_ulong()==0){
+            Ledset1.setPixelColor(bitSelect.to_ulong(),red.to_ulong(),green.to_ulong(),blue.to_ulong());
+            Ledset1.show();
+        }
+        else if(boardSelect.to_ulong()==1){
+            Ledset2.setPixelColor(bitSelect.to_ulong(),red.to_ulong(),green.to_ulong(),red.to_ulong());
+            Ledset2.show();
         }
         updated = false;
     }
