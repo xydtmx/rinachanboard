@@ -13,7 +13,7 @@
 
 using namespace std;
 
-Adafruit_NeoPixel LedStrip(17, 2, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel LedStrip(88, 2, NEO_GRB + NEO_KHZ800);
 
 atomic<bool> updated(false);
 bitset<8> functionCommand, boardSelect, bitSelect, red, green, blue;
@@ -59,6 +59,21 @@ void setup() {
 
     BLEAdvertising *pAdvertising = pServer->getAdvertising();
     pAdvertising->start();
+
+
+    for (int i = 0; i <= 88; i++) {
+        if (bitSelect.to_ulong() == i) {
+            LedStrip.setPixelColor(i, Adafruit_NeoPixel::Color(
+                    red.to_ulong(),
+                    green.to_ulong(),
+                    blue.to_ulong()))
+                    ;} else
+            LedStrip.setPixelColor(i, Adafruit_NeoPixel::Color(
+                    15,
+                    15,
+                    15));;
+        LedStrip.show();
+    }
 }
 
 void loop() {
@@ -78,12 +93,18 @@ void loop() {
         Serial.print(blue.to_ulong());
         Serial.println(")");
 
-        for (int i = 0; i <= 47; i++) {
-            LedStrip.setPixelColor(i, Adafruit_NeoPixel::Color(
-                    red.to_ulong(),
-                    green.to_ulong(),
-                    blue.to_ulong()
-            ));
+
+        for (int i = 0; i <= 88; i++) {
+            if (bitSelect.to_ulong() == i) {
+                LedStrip.setPixelColor(i, Adafruit_NeoPixel::Color(
+                        red.to_ulong(),
+                        green.to_ulong(),
+                        blue.to_ulong()))
+            ;} else
+                LedStrip.setPixelColor(i, Adafruit_NeoPixel::Color(
+                        15,
+                        15,
+                        15));;
             LedStrip.show();
         }
         updated = false;
