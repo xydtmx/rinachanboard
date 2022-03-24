@@ -10,12 +10,13 @@
 #define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
 
 #define PIN 2;
+#define PIN 4;
 
 using namespace std;
 
 Adafruit_NeoPixel Ledset1(88, 2, NEO_GRB + NEO_KHZ800);
 
-Adafruit_NeoPixel Ledset2(85, 3, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel Ledset2(85, 4, NEO_GRB + NEO_KHZ800);
 
 
 atomic<bool> updated(false);
