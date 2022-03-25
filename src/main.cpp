@@ -9,15 +9,19 @@
 #define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
 #define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
 
-#define PIN 2;
-#define PIN 4;
+#define PIN 2;//Ledset1
+#define PIN 4;//ledset2
+#define PIN 5;//ledset3
+#define PIN 18;//ledset4
+#define PIN 19;//ledset5
 
 using namespace std;
 
 Adafruit_NeoPixel Ledset1(88, 2, NEO_GRB + NEO_KHZ800);
-
-Adafruit_NeoPixel Ledset2(85, 4, NEO_GRB + NEO_KHZ800);
-
+Adafruit_NeoPixel Ledset2(84, 4, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel Ledset3(78, 5, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel Ledset4(57, 18, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel Ledset5(49, 19, NEO_GRB + NEO_KHZ800);
 
 atomic<bool> updated(false);
 bitset<8> functionCommand, boardSelect, bitSelect, red, green, blue;
@@ -100,12 +104,26 @@ void loop() {
 
         if (boardSelect.to_ulong()==0){
             Ledset1.setPixelColor(bitSelect.to_ulong(),red.to_ulong(),green.to_ulong(),blue.to_ulong());
-            Ledset1.show();
         }
         else if(boardSelect.to_ulong()==1){
             Ledset2.setPixelColor(bitSelect.to_ulong(),red.to_ulong(),green.to_ulong(),red.to_ulong());
-            Ledset2.show();
         }
+        else if(boardSelect.to_ulong()==2){
+            Ledset3.setPixelColor(bitSelect.to_ulong(),red.to_ulong(),green.to_ulong(),red.to_ulong());
+        }
+        else if(boardSelect.to_ulong()==3){
+            Ledset4.setPixelColor(bitSelect.to_ulong(),red.to_ulong(),green.to_ulong(),red.to_ulong());
+        }
+        else if(boardSelect.to_ulong()==4){
+            Ledset5.setPixelColor(bitSelect.to_ulong(),red.to_ulong(),green.to_ulong(),red.to_ulong());
+        }
+
+
+        Ledset1.show();
+        Ledset2.show();
+        Ledset3.show();
+        Ledset4.show();
+        Ledset5.show();
         updated = false;
     }
 }
