@@ -101,29 +101,26 @@ void loop() {
         Serial.print(blue.to_ulong());
         Serial.println(")");
 
-
-        if (boardSelect.to_ulong()==0){
-            Ledset1.setPixelColor(bitSelect.to_ulong(),red.to_ulong(),green.to_ulong(),blue.to_ulong());
+        if (functionCommand.to_ulong() << 7 == 0) {
+            if (boardSelect.to_ulong() == 0) {
+                Ledset1.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
+            } else if (boardSelect.to_ulong() == 1) {
+                Ledset2.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), red.to_ulong());
+            } else if (boardSelect.to_ulong() == 2) {
+                Ledset3.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), red.to_ulong());
+            } else if (boardSelect.to_ulong() == 3) {
+                Ledset4.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), red.to_ulong());
+            } else if (boardSelect.to_ulong() == 4) {
+                Ledset5.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), red.to_ulong());
+            }
         }
-        else if(boardSelect.to_ulong()==1){
-            Ledset2.setPixelColor(bitSelect.to_ulong(),red.to_ulong(),green.to_ulong(),red.to_ulong());
+        else if (functionCommand.to_ulong()<<7 ==1) {
+            Ledset1.show();
+            Ledset2.show();
+            Ledset3.show();
+            Ledset4.show();
+            Ledset5.show();
         }
-        else if(boardSelect.to_ulong()==2){
-            Ledset3.setPixelColor(bitSelect.to_ulong(),red.to_ulong(),green.to_ulong(),red.to_ulong());
-        }
-        else if(boardSelect.to_ulong()==3){
-            Ledset4.setPixelColor(bitSelect.to_ulong(),red.to_ulong(),green.to_ulong(),red.to_ulong());
-        }
-        else if(boardSelect.to_ulong()==4){
-            Ledset5.setPixelColor(bitSelect.to_ulong(),red.to_ulong(),green.to_ulong(),red.to_ulong());
-        }
-
-
-        Ledset1.show();
-        Ledset2.show();
-        Ledset3.show();
-        Ledset4.show();
-        Ledset5.show();
         updated = false;
     }
 }
