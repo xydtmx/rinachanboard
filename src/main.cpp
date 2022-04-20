@@ -49,7 +49,7 @@ void setup() {
     Ledset1.begin();
     Ledset1.show(); // Initialize all pixels to 'off'
 
-    BLEDevice::init("MyESP32");
+    BLEDevice::init("RinachanBoard");
     BLEServer *pServer = BLEDevice::createServer();
 
     BLEService *pService = pServer->createService(SERVICE_UUID);
@@ -86,40 +86,134 @@ void setup() {
 
 void loop() {
     if (updated) {
-        Serial.print("Function command: ");
-        Serial.println(functionCommand.to_string().c_str());
-        Serial.print("Board select: ");
-        Serial.println(boardSelect.to_string().c_str());
-        Serial.print("Bit select: ");
-        Serial.println(bitSelect.to_string().c_str());
+//        Serial.print("Function command: ");
+//        Serial.println(functionCommand.to_string().c_str());
+//        Serial.print("Board select: ");
+//        Serial.println(boardSelect.to_string().c_str());
+//        Serial.print("Bit select: ");
+//        Serial.println(bitSelect.to_string().c_str());
+//
+//        Serial.print("RGB: (");
+//        Serial.print(red.to_ulong());
+//        Serial.print(", ");
+//        Serial.print(green.to_ulong());
+//        Serial.print(", ");
+//        Serial.print(blue.to_ulong());
+//        Serial.println(")");
 
-        Serial.print("RGB: (");
-        Serial.print(red.to_ulong());
-        Serial.print(", ");
-        Serial.print(green.to_ulong());
-        Serial.print(", ");
-        Serial.print(blue.to_ulong());
-        Serial.println(")");
-
-        if (functionCommand.to_ulong() << 7 == 0) {
+        if (functionCommand[7] == 0) {//上传部分
             if (boardSelect.to_ulong() == 0) {
                 Ledset1.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
+
+//                Serial.println(functionCommand[7]);
+
             } else if (boardSelect.to_ulong() == 1) {
                 Ledset2.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), red.to_ulong());
+
+//                Serial.print("RGB: (");
+//                Serial.print(red.to_ulong());
+//                Serial.print(", ");
+//                Serial.print(green.to_ulong());
+//                Serial.print(", ");
+//                Serial.print(blue.to_ulong());
+//                Serial.println(")");
+//                Serial.println("2");
+
             } else if (boardSelect.to_ulong() == 2) {
                 Ledset3.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), red.to_ulong());
+
+//                Serial.print("RGB: (");
+//                Serial.print(red.to_ulong());
+//                Serial.print(", ");
+//                Serial.print(green.to_ulong());
+//                Serial.print(", ");
+//                Serial.print(blue.to_ulong());
+//                Serial.println(")");
+//                Serial.println("3");
+
             } else if (boardSelect.to_ulong() == 3) {
                 Ledset4.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), red.to_ulong());
+
+//                Serial.print("RGB: (");
+//                Serial.print(red.to_ulong());
+//                Serial.print(", ");
+//                Serial.print(green.to_ulong());
+//                Serial.print(", ");
+//                Serial.print(blue.to_ulong());
+//                Serial.println(")");
+//                Serial.println("4");
+
             } else if (boardSelect.to_ulong() == 4) {
                 Ledset5.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), red.to_ulong());
+
+//                Serial.print("RGB: (");
+//                Serial.print(red.to_ulong());
+//                Serial.print(", ");
+//                Serial.print(green.to_ulong());
+//                Serial.print(", ");
+//                Serial.print(blue.to_ulong());
+//                Serial.println(")");
+//                Serial.println("5");
+
             }
         }
-        else if (functionCommand.to_ulong()<<7 ==1) {
+        else if (functionCommand[7] == 1) {//输出部分
+            if (boardSelect.to_ulong() == 0) {
+//                Ledset1.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
+
+                Serial.println(functionCommand[7]);
+            } else if (boardSelect.to_ulong() == 1) {
+                Ledset2.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), red.to_ulong());
+
+//                Serial.print("RGB: (");
+//                Serial.print(red.to_ulong());
+//                Serial.print(", ");
+//                Serial.print(green.to_ulong());
+//                Serial.print(", ");
+//                Serial.print(blue.to_ulong());
+//                Serial.println(")");
+//                Serial.println("2");
+            } else if (boardSelect.to_ulong() == 2) {
+                Ledset3.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), red.to_ulong());
+
+//                Serial.print("RGB: (");
+//                Serial.print(red.to_ulong());
+//                Serial.print(", ");
+//                Serial.print(green.to_ulong());
+//                Serial.print(", ");
+//                Serial.print(blue.to_ulong());
+//                Serial.println(")");
+//                Serial.println("3");
+            } else if (boardSelect.to_ulong() == 3) {
+                Ledset4.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), red.to_ulong());
+
+//                Serial.print("RGB: (");
+//                Serial.print(red.to_ulong());
+//                Serial.print(", ");
+//                Serial.print(green.to_ulong());
+//                Serial.print(", ");
+//                Serial.print(blue.to_ulong());
+//                Serial.println(")");
+//                Serial.println("4");
+            } else if (boardSelect.to_ulong() == 4) {
+                Ledset5.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), red.to_ulong());
+
+//                Serial.print("RGB: (");
+//                Serial.print(red.to_ulong());
+//                Serial.print(", ");
+//                Serial.print(green.to_ulong());
+//                Serial.print(", ");
+//                Serial.print(blue.to_ulong());
+//                Serial.println(")");
+//                Serial.println("5");
+            }
             Ledset1.show();
             Ledset2.show();
             Ledset3.show();
             Ledset4.show();
             Ledset5.show();
+            Serial.println("out");
+
         }
         updated = false;
     }
