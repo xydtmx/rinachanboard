@@ -86,20 +86,20 @@ void setup() {
 
 void loop() {
     if (updated) {
-//        Serial.print("Function command: ");
-//        Serial.println(functionCommand.to_string().c_str());
-//        Serial.print("Board select: ");
-//        Serial.println(boardSelect.to_string().c_str());
-//        Serial.print("Bit select: ");
-//        Serial.println(bitSelect.to_string().c_str());
-//
-//        Serial.print("RGB: (");
-//        Serial.print(red.to_ulong());
-//        Serial.print(", ");
-//        Serial.print(green.to_ulong());
-//        Serial.print(", ");
-//        Serial.print(blue.to_ulong());
-//        Serial.println(")");
+        Serial.print("Function command: ");
+        Serial.println(functionCommand.to_string().c_str());
+        Serial.print("Board select: ");
+        Serial.println(boardSelect.to_string().c_str());
+        Serial.print("Bit select: ");
+        Serial.println(bitSelect.to_string().c_str());
+
+        Serial.print("RGB: (");
+        Serial.print(red.to_ulong());
+        Serial.print(", ");
+        Serial.print(green.to_ulong());
+        Serial.print(", ");
+        Serial.print(blue.to_ulong());
+        Serial.println(")");
 
         if (functionCommand[7] == 0) {//上传部分
             if (boardSelect.to_ulong() == 0) {
