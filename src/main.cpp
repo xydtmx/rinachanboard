@@ -108,7 +108,7 @@ void loop() {
 //                Serial.println(functionCommand[7]);
 
             } else if (boardSelect.to_ulong() == 1) {
-                Ledset2.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), red.to_ulong());
+                Ledset2.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
 
 //                Serial.print("RGB: (");
 //                Serial.print(red.to_ulong());
@@ -120,7 +120,7 @@ void loop() {
 //                Serial.println("2");
 
             } else if (boardSelect.to_ulong() == 2) {
-                Ledset3.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), red.to_ulong());
+                Ledset3.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
 
 //                Serial.print("RGB: (");
 //                Serial.print(red.to_ulong());
@@ -132,7 +132,7 @@ void loop() {
 //                Serial.println("3");
 
             } else if (boardSelect.to_ulong() == 3) {
-                Ledset4.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), red.to_ulong());
+                Ledset4.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
 
 //                Serial.print("RGB: (");
 //                Serial.print(red.to_ulong());
@@ -144,7 +144,7 @@ void loop() {
 //                Serial.println("4");
 
             } else if (boardSelect.to_ulong() == 4) {
-                Ledset5.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), red.to_ulong());
+                Ledset5.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
 
 //                Serial.print("RGB: (");
 //                Serial.print(red.to_ulong());
@@ -159,11 +159,11 @@ void loop() {
         }
         else if (functionCommand[7] == 1) {//输出部分
             if (boardSelect.to_ulong() == 0) {
-//                Ledset1.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
+                Ledset1.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
 
                 Serial.println(functionCommand[7]);
             } else if (boardSelect.to_ulong() == 1) {
-                Ledset2.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), red.to_ulong());
+                Ledset2.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
 
 //                Serial.print("RGB: (");
 //                Serial.print(red.to_ulong());
@@ -174,7 +174,7 @@ void loop() {
 //                Serial.println(")");
 //                Serial.println("2");
             } else if (boardSelect.to_ulong() == 2) {
-                Ledset3.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), red.to_ulong());
+                Ledset3.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
 
 //                Serial.print("RGB: (");
 //                Serial.print(red.to_ulong());
@@ -185,7 +185,7 @@ void loop() {
 //                Serial.println(")");
 //                Serial.println("3");
             } else if (boardSelect.to_ulong() == 3) {
-                Ledset4.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), red.to_ulong());
+                Ledset4.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
 
 //                Serial.print("RGB: (");
 //                Serial.print(red.to_ulong());
@@ -196,7 +196,7 @@ void loop() {
 //                Serial.println(")");
 //                Serial.println("4");
             } else if (boardSelect.to_ulong() == 4) {
-                Ledset5.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), red.to_ulong());
+                Ledset5.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
 
 //                Serial.print("RGB: (");
 //                Serial.print(red.to_ulong());
