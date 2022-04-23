@@ -17,6 +17,23 @@
 
 using namespace std;
 
+BLEServer* pServer = NULL;
+BLECharacteristic* pCharacteristic = NULL;
+bool deviceConnected = false;
+bool oldDeviceConnected = false;
+uint32_t value = 0;
+
+class MyServerCallbacks: public BLEServerCallbacks {
+    void onConnect(BLEServer* pServer) {
+        deviceConnected = true;            //如果有设备连接
+        BLEDevice::startAdvertising();     //开始广播
+    };
+
+    void onDisconnect(BLEServer* pServer) {    //如果无设备
+        deviceConnected = false;
+    }
+};
+
 Adafruit_NeoPixel Ledset1(88, 2, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel Ledset2(84, 4, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel Ledset3(78, 5, NEO_GRB + NEO_KHZ800);
@@ -100,6 +117,9 @@ void loop() {
         Serial.print(", ");
         Serial.print(blue.to_ulong());
         Serial.println(")");
+
+
+        };
 
         if (functionCommand[7] == 0) {//上传部分
             if (boardSelect.to_ulong() == 0) {
