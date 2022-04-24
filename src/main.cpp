@@ -25,13 +25,13 @@ uint32_t value = 0;
 class MyServerCallbacks: public BLEServerCallbacks {
     void onConnect(BLEServer* pServer)override {
         deviceConnected = true;            //如果有设备连接
-        BLEDevice::startAdvertising();     //开始广播
-        Serial.print("有连接");
+//        BLEDevice::startAdvertising();     //开始广播
+        Serial.print("mmm");
     };
 
     void onDisconnect(BLEServer* pServer)override {    //如果无设备
         deviceConnected = false;
-        Serial.print("无连接");
+        Serial.print("nnn");
     }
 };
 
@@ -68,7 +68,8 @@ void setup() {
     Ledset1.show(); // Initialize all pixels to 'off'
 
     BLEDevice::init("RinachanBoard");
-    BLEServer *pServer = BLEDevice::createServer();
+    BLEServer *pServer = BLEDevice::createServer();    //创建Server
+    pServer->setCallbacks(new MyServerCallbacks());    //设置匿名回调函数（实例化MyServerCallbacks）
 
     BLEService *pService = pServer->createService(SERVICE_UUID);
 
@@ -105,15 +106,13 @@ void setup() {
 
 void loop() {
 
-    if (deviceConnected) {        //如果设备已连接
-        Serial.println("已连接");
-    }
 
-    if (!deviceConnected) {  //如果断联&&旧设备连接（？）
+    if (!deviceConnected) {  //如果断联
         pServer->startAdvertising(); // 重新广播
         Serial.println("start advertising");
         delay(2000);
     }
+
 
     if (updated) {
         Serial.print("Function command: ");
@@ -132,7 +131,7 @@ void loop() {
         Serial.println(")");
 
 
-        };
+
 
         if (functionCommand[7] == 0) {//上传部分
             if (boardSelect.to_ulong() == 0) {
@@ -249,4 +248,5 @@ void loop() {
 
         }
         updated = false;
-    }
+        };
+}
