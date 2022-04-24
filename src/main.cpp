@@ -19,18 +19,19 @@ using namespace std;
 
 BLEServer* pServer = NULL;
 BLECharacteristic* pCharacteristic = NULL;
-bool deviceConnected = false;
-bool oldDeviceConnected = false;
+volatile bool deviceConnected = false;
 uint32_t value = 0;
 
 class MyServerCallbacks: public BLEServerCallbacks {
-    void onConnect(BLEServer* pServer) {
+    void onConnect(BLEServer* pServer)override {
         deviceConnected = true;            //如果有设备连接
         BLEDevice::startAdvertising();     //开始广播
+        Serial.print("有连接");
     };
 
-    void onDisconnect(BLEServer* pServer) {    //如果无设备
+    void onDisconnect(BLEServer* pServer)override {    //如果无设备
         deviceConnected = false;
+        Serial.print("无连接");
     }
 };
 
@@ -80,28 +81,40 @@ void setup() {
     pCharacteristic->setCallbacks(new MyCallbacks());
 
     pCharacteristic->setValue("Hello World");
-    pService->start();
+    pService->start();//服务启动
 
     BLEAdvertising *pAdvertising = pServer->getAdvertising();
-    pAdvertising->start();
+    pAdvertising->start();//开始广播
+    Serial.println("等待一个客户端连接至notify...");
 
 
-    for (int i = 0; i <= 88; i++) {
-        if (bitSelect.to_ulong() == i) {
-            Ledset1.setPixelColor(i, Adafruit_NeoPixel::Color(
-                    red.to_ulong(),
-                    green.to_ulong(),
-                    blue.to_ulong()))
-                    ;} else
-            Ledset1.setPixelColor(i, Adafruit_NeoPixel::Color(
-                    15,
-                    15,
-                    15));;
-        Ledset1.show();
-    }
+//    for (int i = 0; i <= 88; i++) {
+//        if (bitSelect.to_ulong() == i) {
+//            Ledset1.setPixelColor(i, Adafruit_NeoPixel::Color(
+//                    red.to_ulong(),
+//                    green.to_ulong(),
+//                    blue.to_ulong()))
+//                    ;} else
+//            Ledset1.setPixelColor(i, Adafruit_NeoPixel::Color(
+//                    15,
+//                    15,
+//                    15));;
+//        Ledset1.show();
+//    }
 }
 
 void loop() {
+
+    if (deviceConnected) {        //如果设备已连接
+        Serial.println("已连接");
+    }
+
+    if (!deviceConnected) {  //如果断联&&旧设备连接（？）
+        pServer->startAdvertising(); // 重新广播
+        Serial.println("start advertising");
+        delay(2000);
+    }
+
     if (updated) {
         Serial.print("Function command: ");
         Serial.println(functionCommand.to_string().c_str());
@@ -237,4 +250,3 @@ void loop() {
         }
         updated = false;
     }
-}
