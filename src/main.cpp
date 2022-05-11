@@ -89,19 +89,7 @@ void setup() {
     Serial.println("等待一个客户端连接至notify...");
 
 
-//    for (int i = 0; i <= 88; i++) {
-//        if (bitSelect.to_ulong() == i) {
-//            Ledset1.setPixelColor(i, Adafruit_NeoPixel::Color(
-//                    red.to_ulong(),
-//                    green.to_ulong(),
-//                    blue.to_ulong()))
-//                    ;} else
-//            Ledset1.setPixelColor(i, Adafruit_NeoPixel::Color(
-//                    15,
-//                    15,
-//                    15));;
-//        Ledset1.show();
-//    }
+
 }
 
 void loop() {
@@ -112,7 +100,6 @@ void loop() {
         Serial.println("start advertising");
         delay(2000);
     }
-
 
     if (updated) {
         Serial.print("Function command: ");
@@ -130,83 +117,76 @@ void loop() {
         Serial.print(blue.to_ulong());
         Serial.println(")");
 
+        if (functionCommand[7] == 0 && functionCommand[6] == 0) {//直接控制部分
+            if (functionCommand[5] == 0) {//上传模式
+                if (boardSelect.to_ulong() == 0) {
+                    Ledset1.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
+                    Serial.print("in1");
+                } else if (boardSelect.to_ulong() == 1) {
+                    Ledset2.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
+                    Serial.print("in2");
 
+                } else if (boardSelect.to_ulong() == 2) {
+                    Ledset3.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
+                    Serial.print("in3");
 
+                } else if (boardSelect.to_ulong() == 3) {
+                    Ledset4.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
+                    Serial.print("in4");
 
-        if (functionCommand[7] == 0) {//上传部分
-            if (boardSelect.to_ulong() == 0) {
-                Ledset1.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
+                } else if (boardSelect.to_ulong() == 4) {
+                    Ledset5.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
+                    Serial.print("in5");
 
-//                Serial.println(functionCommand[7]);
+                }
+            }
+            else if(functionCommand[5] == 1){//输出模式
+                    if (boardSelect.to_ulong() == 0) {
+                        Ledset1.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
+                        Serial.print("out1");
 
-            } else if (boardSelect.to_ulong() == 1) {
-                Ledset2.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
+                    } else if (boardSelect.to_ulong() == 1) {
+                        Ledset2.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
+                        Serial.print("out2");
 
-//                Serial.print("RGB: (");
-//                Serial.print(red.to_ulong());
-//                Serial.print(", ");
-//                Serial.print(green.to_ulong());
-//                Serial.print(", ");
-//                Serial.print(blue.to_ulong());
-//                Serial.println(")");
-//                Serial.println("2");
+                    } else if (boardSelect.to_ulong() == 2) {
+                        Ledset3.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
+                        Serial.print("out3");
 
-            } else if (boardSelect.to_ulong() == 2) {
-                Ledset3.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
+                    } else if (boardSelect.to_ulong() == 3) {
+                        Ledset4.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
+                        Serial.print("out4");
 
-//                Serial.print("RGB: (");
-//                Serial.print(red.to_ulong());
-//                Serial.print(", ");
-//                Serial.print(green.to_ulong());
-//                Serial.print(", ");
-//                Serial.print(blue.to_ulong());
-//                Serial.println(")");
-//                Serial.println("3");
+                    } else if (boardSelect.to_ulong() == 4) {
+                        Ledset5.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
+                        Serial.print("out5");
 
-            } else if (boardSelect.to_ulong() == 3) {
-                Ledset4.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
-
-//                Serial.print("RGB: (");
-//                Serial.print(red.to_ulong());
-//                Serial.print(", ");
-//                Serial.print(green.to_ulong());
-//                Serial.print(", ");
-//                Serial.print(blue.to_ulong());
-//                Serial.println(")");
-//                Serial.println("4");
-
-            } else if (boardSelect.to_ulong() == 4) {
-                Ledset5.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
-
-//                Serial.print("RGB: (");
-//                Serial.print(red.to_ulong());
-//                Serial.print(", ");
-//                Serial.print(green.to_ulong());
-//                Serial.print(", ");
-//                Serial.print(blue.to_ulong());
-//                Serial.println(")");
-//                Serial.println("5");
-
+                    }
+                Ledset1.show();
+                Ledset2.show();
+                Ledset3.show();
+                Ledset4.show();
+                Ledset5.show();
+//                Serial.println("out");
             }
         }
-        else if (functionCommand[7] == 1) {//输出部分
-            if (functionCommand[6]==1){
-                for (int i = 0; i <88;i++){
-                    Ledset1.setPixelColor(i,0,0,0);
-                }
-                for (int i = 0; i <84;i++){
-                    Ledset2.setPixelColor(i,0,0,0);
-                }
-                for (int i = 0; i <78;i++){
-                    Ledset3.setPixelColor(i,0,0,0);
-                }
-                for (int i = 0; i <57;i++){
-                    Ledset4.setPixelColor(i,0,0,0);
-                }
-                for (int i = 0; i <49;i++){
-                    Ledset5.setPixelColor(i,0,0,0);
-                }
+        else if (functionCommand[7] == 1 && functionCommand[6] == 1) {//系统表情模式
                 if (functionCommand[5]==0&&functionCommand[4]==0&&functionCommand[3]==0){
+                    for (int i = 0; i <88;i++){
+                        Ledset1.setPixelColor(i,0,0,0);
+                    }
+                    for (int i = 0; i <84;i++){
+                        Ledset2.setPixelColor(i,0,0,0);
+                    }
+                    for (int i = 0; i <78;i++){
+                        Ledset3.setPixelColor(i,0,0,0);
+                    }
+                    for (int i = 0; i <57;i++){
+                        Ledset4.setPixelColor(i,0,0,0);
+                    }
+                    for (int i = 0; i <49;i++){
+                        Ledset5.setPixelColor(i,0,0,0);
+                    }
                     Ledset1.setPixelColor(50,15,0,10);
                     Ledset1.setPixelColor(51,15,0,10);
                     Ledset1.setPixelColor(70,15,0,10);
@@ -237,8 +217,25 @@ void loop() {
                     Ledset4.setPixelColor(47,15,0,10);
                     Ledset4.setPixelColor(48,15,0,10);
                     Ledset4.setPixelColor(49,15,0,10);
+
+                    Serial.println("default1");
                 }
                 else if (functionCommand[5]==0&&functionCommand[4]==0&&functionCommand[3]==1){
+                    for (int i = 0; i <88;i++){
+                        Ledset1.setPixelColor(i,0,0,0);
+                    }
+                    for (int i = 0; i <84;i++){
+                        Ledset2.setPixelColor(i,0,0,0);
+                    }
+                    for (int i = 0; i <78;i++){
+                        Ledset3.setPixelColor(i,0,0,0);
+                    }
+                    for (int i = 0; i <57;i++){
+                        Ledset4.setPixelColor(i,0,0,0);
+                    }
+                    for (int i = 0; i <49;i++){
+                        Ledset5.setPixelColor(i,0,0,0);
+                    }
                     Ledset1.setPixelColor(70,15,0,10);
                     Ledset1.setPixelColor(71,15,0,10);
                     Ledset1.setPixelColor(83,15,0,10);
@@ -281,8 +278,25 @@ void loop() {
                     Ledset5.setPixelColor(10,15,0,10);
                     Ledset5.setPixelColor(8,15,0,10);
 
+                    Serial.println("default2");
+
                 }
                 else if (functionCommand[5]==0&&functionCommand[4]==1&&functionCommand[3]==0){
+                    for (int i = 0; i <88;i++){
+                        Ledset1.setPixelColor(i,0,0,0);
+                    }
+                    for (int i = 0; i <84;i++){
+                        Ledset2.setPixelColor(i,0,0,0);
+                    }
+                    for (int i = 0; i <78;i++){
+                        Ledset3.setPixelColor(i,0,0,0);
+                    }
+                    for (int i = 0; i <57;i++){
+                        Ledset4.setPixelColor(i,0,0,0);
+                    }
+                    for (int i = 0; i <49;i++){
+                        Ledset5.setPixelColor(i,0,0,0);
+                    }
                     Ledset1.setPixelColor(70,15,0,10);
                     Ledset1.setPixelColor(71,15,0,10);
                     Ledset1.setPixelColor(83,15,0,10);
@@ -323,8 +337,26 @@ void loop() {
                     Ledset5.setPixelColor(9,15,0,10);
                     Ledset5.setPixelColor(10,15,0,10);
                     Ledset5.setPixelColor(8,15,0,10);
+
+                    Serial.println("default3");
+
                 }
                 else if (functionCommand[5]==0&&functionCommand[4]==1&&functionCommand[3]==1){
+                    for (int i = 0; i <88;i++){
+                        Ledset1.setPixelColor(i,0,0,0);
+                    }
+                    for (int i = 0; i <84;i++){
+                        Ledset2.setPixelColor(i,0,0,0);
+                    }
+                    for (int i = 0; i <78;i++){
+                        Ledset3.setPixelColor(i,0,0,0);
+                    }
+                    for (int i = 0; i <57;i++){
+                        Ledset4.setPixelColor(i,0,0,0);
+                    }
+                    for (int i = 0; i <49;i++){
+                        Ledset5.setPixelColor(i,0,0,0);
+                    }
                     Ledset1.setPixelColor(72,15,0,10);
                     Ledset1.setPixelColor(71,15,0,10);
                     Ledset1.setPixelColor(83,15,0,10);
@@ -367,8 +399,26 @@ void loop() {
                     Ledset5.setPixelColor(9,15,0,10);
                     Ledset5.setPixelColor(10,15,0,10);
                     Ledset5.setPixelColor(8,15,0,10);
+
+                    Serial.println("default4");
+
                 }
                 else if (functionCommand[5]==1&&functionCommand[4]==0&&functionCommand[3]==0){
+                    for (int i = 0; i <88;i++){
+                        Ledset1.setPixelColor(i,0,0,0);
+                    }
+                    for (int i = 0; i <84;i++){
+                        Ledset2.setPixelColor(i,0,0,0);
+                    }
+                    for (int i = 0; i <78;i++){
+                        Ledset3.setPixelColor(i,0,0,0);
+                    }
+                    for (int i = 0; i <57;i++){
+                        Ledset4.setPixelColor(i,0,0,0);
+                    }
+                    for (int i = 0; i <49;i++){
+                        Ledset5.setPixelColor(i,0,0,0);
+                    }
                     Ledset1.setPixelColor(69,15,0,10);
                     Ledset1.setPixelColor(70,15,0,10);
                     Ledset1.setPixelColor(84,15,0,10);
@@ -421,28 +471,11 @@ void loop() {
                     Ledset5.setPixelColor(6,15,0,10);
                     Ledset5.setPixelColor(12,15,0,10);
                     Ledset5.setPixelColor(13,15,0,10);
-                }
-            }
-            else {
-                if (boardSelect.to_ulong() == 0) {
-                    Ledset1.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
 
-
-                } else if (boardSelect.to_ulong() == 1) {
-                    Ledset2.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
-
-
-                } else if (boardSelect.to_ulong() == 2) {
-                    Ledset3.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
-
-                } else if (boardSelect.to_ulong() == 3) {
-                    Ledset4.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
-
-                } else if (boardSelect.to_ulong() == 4) {
-                    Ledset5.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
+                    Serial.println("default5");
 
                 }
-            }
+
             Ledset1.show();
             Ledset2.show();
             Ledset3.show();
@@ -452,5 +485,5 @@ void loop() {
 
         }
         updated = false;
-        };
+    };
 }
