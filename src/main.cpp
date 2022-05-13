@@ -1,6 +1,7 @@
 #include <Adafruit_NeoPixel.h>
 #include <BLEDevice.h>
 #include <BLEServer.h>
+#include <Preferences.h>
 //#include <BLEUtils.h>
 
 #include <atomic>
@@ -89,7 +90,26 @@ void setup() {
     Serial.println("等待一个客户端连接至notify...");
 
 
-
+    for (int i = 0; i <= 88; i++) {
+            Ledset1.setPixelColor(i, Adafruit_NeoPixel::Color(0,0,0));;
+            Ledset1.show();
+    }
+    for (int i = 0; i <= 84; i++) {
+        Ledset2.setPixelColor(i, Adafruit_NeoPixel::Color(0,0,0));;
+        Ledset2.show();
+    }
+    for (int i = 0; i <= 78; i++) {
+        Ledset3.setPixelColor(i, Adafruit_NeoPixel::Color(0,0,0));;
+        Ledset3.show();
+    }
+    for (int i = 0; i <= 57; i++) {
+        Ledset4.setPixelColor(i, Adafruit_NeoPixel::Color(0,0,0));;
+        Ledset4.show();
+    }
+    for (int i = 0; i <= 49; i++) {
+        Ledset5.setPixelColor(i, Adafruit_NeoPixel::Color(0,0,0));;
+        Ledset5.show();
+    }
 }
 
 void loop() {
