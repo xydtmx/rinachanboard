@@ -90,7 +90,7 @@ void setup() {
     Serial.println("等待一个客户端连接至notify...");
 
 
-    for (int i = 0; i <= 88; i++) {
+    for (int i = 0; i <= 88; i++) {  //重置面板
             Ledset1.setPixelColor(i, Adafruit_NeoPixel::Color(0,0,0));;
             Ledset1.show();
     }
