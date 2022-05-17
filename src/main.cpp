@@ -123,7 +123,7 @@ void loop() {
 if(data[0] == 0){
     LEDcontrol_purecolor();
 }
-else if (data[1] == 1){
+else if (data[0] == 1){
     LEDcontrol_RGBmode();
 }
 
