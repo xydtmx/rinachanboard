@@ -1,10 +1,12 @@
 #include <Adafruit_NeoPixel.h>
 #include <BLEDevice.h>
 #include <BLEServer.h>
-#include "Preferences.h"
+#include <Preferences.h>
 //#include <BLEUtils.h>
 
-#include <LEDcontrol_purecolor.h>
+#include "LEDcontrol_purecolor.h"
+#include "LEDcontrol_RGBmode.h"
+
 
 #include <atomic>
 #include <bitset>
@@ -118,63 +120,15 @@ void loop() {
     }
 
 
-if(data[0] == 10){
+if(data[0] == 0){
     LEDcontrol_purecolor();
 }
-//        if (functionCommand[7] == 0 && functionCommand[6] == 0) {//直接控制部分
-//            if (functionCommand[5] == 0) {//上传模式
-//                if (boardSelect.to_ulong() == 0) {
-//                    Ledset1.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
-//                    Serial.print("in1");
-//                } else if (boardSelect.to_ulong() == 1) {
-//                    Ledset2.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
-//                    Serial.print("in2");
-//
-//                } else if (boardSelect.to_ulong() == 2) {
-//                    Ledset3.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
-//                    Serial.print("in3");
-//
-//                } else if (boardSelect.to_ulong() == 3) {
-//                    Ledset4.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
-//                    Serial.print("in4");
-//
-//                } else if (boardSelect.to_ulong() == 4) {
-//                    Ledset5.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
-//                    Serial.print("in5");
-//
-//                }
-//            }
-//            else if(functionCommand[5] == 1){//输出模式
-//                    if (boardSelect.to_ulong() == 0) {
-//                        Ledset1.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
-//                        Serial.print("out1");
-//
-//                    } else if (boardSelect.to_ulong() == 1) {
-//                        Ledset2.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
-//                        Serial.print("out2");
-//
-//                    } else if (boardSelect.to_ulong() == 2) {
-//                        Ledset3.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
-//                        Serial.print("out3");
-//
-//                    } else if (boardSelect.to_ulong() == 3) {
-//                        Ledset4.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
-//                        Serial.print("out4");
-//
-//                    } else if (boardSelect.to_ulong() == 4) {
-//                        Ledset5.setPixelColor(bitSelect.to_ulong(), red.to_ulong(), green.to_ulong(), blue.to_ulong());
-//                        Serial.print("out5");
-//
-//                    }
-//                Ledset1.show();
-//                Ledset2.show();
-//                Ledset3.show();
-//                Ledset4.show();
-//                Ledset5.show();
-////                Serial.println("out");
-//            }
-//        }
-        else if (functionCommand[7] == 1 && functionCommand[6] == 1) {//系统表情模式
+else if (data[1] == 1){
+    LEDcontrol_RGBmode();
+}
+
+
+        if (functionCommand[7] == 1 && functionCommand[6] == 1) {//系统表情模式
                 if (functionCommand[5]==0&&functionCommand[4]==0&&functionCommand[3]==0){
                     for (int i = 0; i <88;i++){
                         Ledset1.setPixelColor(i,0,0,0);

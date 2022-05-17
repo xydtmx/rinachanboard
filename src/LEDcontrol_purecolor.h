@@ -5,7 +5,6 @@
 #ifndef RINACHANBOARD_LEDCONTROL_PURECOLOR_H
 #define RINACHANBOARD_LEDCONTROL_PURECOLOR_H
 
-
 extern String data;
 extern Adafruit_NeoPixel Ledset1;
 extern Adafruit_NeoPixel Ledset2;
