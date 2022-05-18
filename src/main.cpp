@@ -26,7 +26,7 @@ BLEServer* pServer = NULL;
 BLECharacteristic* pCharacteristic = NULL;
 volatile bool deviceConnected = false;
 
-String data;
+std::string data;
 
 class MyServerCallbacks: public BLEServerCallbacks {
     void onConnect(BLEServer* pServer)override {

@@ -5,7 +5,7 @@
 #ifndef RINACHANBOARD_LEDCONTROL_SYSTEMEXPRESSION_H
 #define RINACHANBOARD_LEDCONTROL_SYSTEMEXPRESSION_H
 
-extern String data;
+extern std::string data;
 extern Adafruit_NeoPixel Ledset1;
 extern Adafruit_NeoPixel Ledset2;
 extern Adafruit_NeoPixel Ledset3;
