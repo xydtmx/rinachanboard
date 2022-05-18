@@ -26,7 +26,7 @@ BLEServer* pServer = NULL;
 BLECharacteristic* pCharacteristic = NULL;
 volatile bool deviceConnected = false;
 
-string data;
+String data;
 
 class MyServerCallbacks: public BLEServerCallbacks {
     void onConnect(BLEServer* pServer)override {
