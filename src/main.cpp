@@ -119,17 +119,15 @@ void loop() {
         delay(2000);
     }
 
-
-if(data[0] == 0){
-    LEDcontrol_purecolor();
-}
-else if (data[0] == 1){
-    LEDcontrol_RGBmode();
-}
-else if (data[0] == 2){
-    SystemExpression();
-}
-
+    if (deviceConnected) {
+        if (data[0] == 0) {
+            LEDcontrol_purecolor();
+        } else if (data[0] == 1) {
+            LEDcontrol_RGBmode();
+        } else if (data[0] == 2) {
+            SystemExpression();
+        }
+    }
 
 
 

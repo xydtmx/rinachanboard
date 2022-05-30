@@ -53,6 +53,8 @@ void SystemExpression(){
         Ledset4.setPixelColor(47,15,0,10);
         Ledset4.setPixelColor(48,15,0,10);
         Ledset4.setPixelColor(49,15,0,10);
+
+        Serial.println("SystemExpression_1");
     }
     else if (data[1] == 1){
         Ledset1.setPixelColor(70,15,0,10);
@@ -96,6 +98,8 @@ void SystemExpression(){
         Ledset5.setPixelColor(9,15,0,10);
         Ledset5.setPixelColor(10,15,0,10);
         Ledset5.setPixelColor(8,15,0,10);
+
+        Serial.println("SystemExpression_2");
     }
     else if (data[1] == 2){
         Ledset1.setPixelColor(70,15,0,10);
@@ -138,6 +142,8 @@ void SystemExpression(){
         Ledset5.setPixelColor(9,15,0,10);
         Ledset5.setPixelColor(10,15,0,10);
         Ledset5.setPixelColor(8,15,0,10);
+
+        Serial.println("SystemExpression_3");
     }
     else if(data[1] == 3){
         Ledset1.setPixelColor(72,15,0,10);
@@ -182,6 +188,8 @@ void SystemExpression(){
         Ledset5.setPixelColor(9,15,0,10);
         Ledset5.setPixelColor(10,15,0,10);
         Ledset5.setPixelColor(8,15,0,10);
+
+        Serial.println("SystemExpression_4");
     }
     else if (data[1] == 4){
         Ledset1.setPixelColor(69,15,0,10);
@@ -236,6 +244,8 @@ void SystemExpression(){
         Ledset5.setPixelColor(6,15,0,10);
         Ledset5.setPixelColor(12,15,0,10);
         Ledset5.setPixelColor(13,15,0,10);
+
+        Serial.println("SystemExpression_5");
     }
 
     Ledset1.show();
