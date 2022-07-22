@@ -32,7 +32,7 @@ class MyServerCallbacks: public BLEServerCallbacks {
     void onConnect(BLEServer* pServer)override {
         deviceConnected = true;            //如果有设备连接
 //        BLEDevice::startAdvertising();     //开始广播
-        Serial.print("mmm");
+        Serial.print("mmm?");
     };
 
     void onDisconnect(BLEServer* pServer)override {    //如果无设备
@@ -89,23 +89,23 @@ void setup() {
 
 
     for (int i = 0; i <= 88; i++) {  //重置面板
-            Ledset1.setPixelColor(i, Adafruit_NeoPixel::Color(0,0,0));;
+            Ledset1.setPixelColor(i, Adafruit_NeoPixel::Color(0,0,0));
             Ledset1.show();
     }
     for (int i = 0; i <= 84; i++) {
-        Ledset2.setPixelColor(i, Adafruit_NeoPixel::Color(0,0,0));;
+        Ledset2.setPixelColor(i, Adafruit_NeoPixel::Color(0,0,0));
         Ledset2.show();
     }
     for (int i = 0; i <= 78; i++) {
-        Ledset3.setPixelColor(i, Adafruit_NeoPixel::Color(0,0,0));;
+        Ledset3.setPixelColor(i, Adafruit_NeoPixel::Color(0,0,0));
         Ledset3.show();
     }
     for (int i = 0; i <= 57; i++) {
-        Ledset4.setPixelColor(i, Adafruit_NeoPixel::Color(0,0,0));;
+        Ledset4.setPixelColor(i, Adafruit_NeoPixel::Color(0,0,0));
         Ledset4.show();
     }
     for (int i = 0; i <= 49; i++) {
-        Ledset5.setPixelColor(i, Adafruit_NeoPixel::Color(0,0,0));;
+        Ledset5.setPixelColor(i, Adafruit_NeoPixel::Color(0,0,0));
         Ledset5.show();
     }
 }
@@ -119,14 +119,17 @@ void loop() {
         delay(2000);
     }
 
-    if (deviceConnected) {
+    if (deviceConnected) { //已连接
         if (data[0] == 0) {
-            LEDcontrol_purecolor();
-        } else if (data[0] == 1) {
-            LEDcontrol_RGBmode();
-        } else if (data[0] == 2) {
-            SystemExpression();
+            LEDcontrol_purecolor(); //纯色模式
         }
+        else if (data[0] == 1) {
+            LEDcontrol_RGBmode();  //RGB模式
+        }
+        else if (data[0] == 2) {
+            SystemExpression();  //系统表情模式
+        }
+
     }
 
 
