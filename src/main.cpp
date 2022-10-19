@@ -1,12 +1,15 @@
 #include <Adafruit_NeoPixel.h>
 #include <BLEDevice.h>
 #include <BLEServer.h>
+#include "SD_MMC.h"
 #include <Preferences.h>
 //#include <BLEUtils.h>
+
 
 #include "LEDcontrol_purecolor.h"
 #include "LEDcontrol_RGBmode.h"
 #include "LEDcontrol_SystemExpression.h"
+#include "file_controller.h"
 
 #include <atomic>
 #include <bitset>
@@ -61,6 +64,9 @@ class MyCallbacks : public BLECharacteristicCallbacks {
     }
 };
 
+char face_store_number[100] = "/1.txt\0";
+
+
 void setup() {
     Serial.begin(115200);
     Ledset1.begin();
@@ -108,9 +114,41 @@ void setup() {
         Ledset5.setPixelColor(i, Adafruit_NeoPixel::Color(0,0,0));
         Ledset5.show();
     }
+
+    if (!SD_MMC.begin())
+    {
+        Serial.println("存储卡挂载失败");
+        return;
+    }
+    uint8_t cardType = SD_MMC.cardType();
+
+    if (cardType == CARD_NONE)
+    {
+        Serial.println("未连接存储卡");
+        return;
+    }
+    else if (cardType == CARD_MMC)
+    {
+        Serial.println("挂载了MMC卡");
+    }
+    else if (cardType == CARD_SD)
+    {
+        Serial.println("挂载了SDSC卡");
+    }
+    else if (cardType == CARD_SDHC)
+    {
+        Serial.println("挂载了SDHC卡");
+    }
+    else
+    {
+        Serial.println("挂载了未知存储卡");
+    }
+
+
 }
 
 void loop() {
+
 
 
     if (!deviceConnected) {  //如果断联
@@ -129,9 +167,11 @@ void loop() {
         else if (data[0] == 2) {
             SystemExpression();  //系统表情模式
         }
+        else if (data[0] == 3) {
+            file_controller();   //文件操作模式
+        }
 
     }
-
 
 
 };
